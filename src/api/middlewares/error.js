@@ -8,6 +8,7 @@ const { env } = require('../../config/vars');
  * @public
  */
 const handler = (err, req, res, next) => {
+  console.log("error handler executed.....")
   const response = {
     code: err.status,
     message: err.message || httpStatus[err.status],

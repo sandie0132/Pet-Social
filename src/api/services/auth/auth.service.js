@@ -24,9 +24,12 @@ function generateTokenResponse(user, accessToken) {
 exports.register = async (userData) => {
   try {
     const user = await new User(userData).save();
+
     const userTransformed = user.transform();
+
     const token = generateTokenResponse(user, user.token());
-    return { token, user: userTransformed };
+
+    return { token, user: userTransformed }; c
   } catch (error) {
     throw User.checkDuplicateEmail(error);
   }
@@ -38,10 +41,13 @@ exports.register = async (userData) => {
  */
 exports.login = async (userData) => {
   try {
+
     const { user, accessToken } = await User.findAndGenerateToken(userData);
+
     const token = generateTokenResponse(user, accessToken);
+
     const userTransformed = user.transform();
-    return { token, user: userTransformed };
+    return { token, userTransformed };
   } catch (error) {
     throw error;
   }

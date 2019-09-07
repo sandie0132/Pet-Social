@@ -1,6 +1,11 @@
 const httpStatus = require('http-status');
 const service = require('./user.service');
 const { handler: errorHandler } = require('../../middlewares/error');
+const jwt = require("jsonwebtoken")
+const jwtSecret = require("../../../config/vars")
+const User = require("../user/user.model")
+
+
 
 /**
  * Load user and append to req.
@@ -34,6 +39,7 @@ exports.loggedIn = (req, res) => res.json(req.user.transform());
  */
 exports.create = async (req, res, next) => {
   try {
+    console.log("body after call", req.body);
     const response = await service.create(req.body);
     return res.status(httpStatus.CREATED).json(response);
   } catch (error) {
@@ -95,3 +101,8 @@ exports.remove = async (req, res, next) => {
     next(error);
   }
 };
+
+
+
+
+

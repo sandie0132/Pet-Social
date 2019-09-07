@@ -48,7 +48,7 @@ app.use('/docs', express.static('docs'));
 
 // enable rate limit
 app.use(rateLimiter());
-
+app.use('/uploads', express.static('uploads'));
 // mount api v1 routes
 app.use('/v1', routes);
 

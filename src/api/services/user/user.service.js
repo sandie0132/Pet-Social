@@ -1,21 +1,23 @@
 const { omit } = require('lodash');
 const User = require('./user.model');
+//const Post = require('../post/post.schema');
+
 // const { handler: errorHandler } = require('../../middlewares/error');
 
 /**
  * Load user and append to req.
  * @public
  */
-// exports.load = async (req, res, next, id) => {
-// try {
-//   console.log(12);
-//   const user = await User.get(id);
-//   req.locals = { user };
-//   return next();
-// } catch (error) {
-//   return errorHandler(error, req, res);
-// }
-// };
+exports.load = async (req, res, next, id) => {
+  try {
+    console.log(12);
+    const user = await User.get(id);
+    req.locals = { user };
+    return next();
+  } catch (error) {
+    return errorHandler(error, req, res);
+  }
+};
 
 /**
  * Get user
@@ -37,6 +39,7 @@ exports.create = async (userData) => {
   try {
     const user = new User(userData);
     const savedUser = await user.save();
+
     return savedUser.transform();
   } catch (error) {
     throw User.checkDuplicateEmail(error);
@@ -84,6 +87,7 @@ exports.update = async (user, updatedData) => {
  */
 exports.list = async (params) => {
   try {
+    console.log("<<<<<<<params>>>>>", params)
     const users = await User.list(params);
     const transformedUsers = users.map(user => user.transform());
     return transformedUsers;
@@ -97,3 +101,6 @@ exports.list = async (params) => {
  * @public
  */
 exports.remove = async user => user.remove();
+
+
+

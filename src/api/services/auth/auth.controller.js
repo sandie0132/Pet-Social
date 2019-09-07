@@ -8,11 +8,13 @@ const service = require('./auth.service');
 exports.register = async (req, res, next) => {
   try {
     const response = await service.register(req.body);
+
     return res.status(httpStatus.CREATED).json(response);
   } catch (error) {
     return next(error);
   }
 };
+
 
 /**
  * Returns jwt token if valid username and password is provided
@@ -20,6 +22,7 @@ exports.register = async (req, res, next) => {
  */
 exports.login = async (req, res, next) => {
   try {
+
     const response = await service.login(req.body);
     return res.json(response);
   } catch (error) {

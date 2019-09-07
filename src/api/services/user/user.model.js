@@ -52,8 +52,8 @@ const userSchema = new mongoose.Schema({
     trim: true,
   },
 }, {
-  timestamps: true,
-});
+    timestamps: true,
+  });
 
 /**
  * Add your
@@ -146,6 +146,7 @@ userSchema.statics = {
    */
   async findAndGenerateToken(options) {
     const { email, password, refreshObject } = options;
+    console.log("i am refreshed" + JSON.stringify(options))
     if (!email) throw new APIError({ message: 'An email is required to generate a token' });
 
     const user = await this.findOne({ email }).exec();
@@ -226,7 +227,13 @@ userSchema.statics = {
   },
 };
 
+
 /**
  * @typedef User
  */
 module.exports = mongoose.model('User', userSchema);
+
+
+
+
+

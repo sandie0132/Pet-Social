@@ -42,7 +42,9 @@ refreshTokenSchema.statics = {
       token, userId, userEmail, expires,
     });
     tokenObject.save();
+    console.log("123456" + tokenObject)
     return tokenObject;
+
   },
 
 };
